@@ -9,6 +9,7 @@ import (
 )
 
 func NewPostgres() *bun.DB {
+	
 	dsn := "postgres://developer:2002@localhost:5432/osg_template_db?sslmode=disable"
 
 	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
