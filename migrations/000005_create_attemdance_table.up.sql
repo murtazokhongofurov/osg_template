@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS attendance(
+    id SERIAL NOT NULL PRIMARY KEY,
+    employee_id INT NOT NULL REFERENCES employees(id),
+    type VARCHAR(100),
+    created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+    deleted_at  TIMESTAMP WITHOUT TIME ZONE
+);

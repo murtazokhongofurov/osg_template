@@ -2,17 +2,26 @@ package repository
 
 import (
 	"database/sql"
+	"fmt"
 
+	"github.com/osg_template/internal/pkg/config"
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/driver/pgdriver"
 )
 
 func NewPostgres() *bun.DB {
-	
-	dsn := "postgres://developer:2002@localhost:5432/osg_template_db?sslmode=disable"
+	cfg := config.Load()
 
-	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
+	postgresUrl := fmt.Sprintf("postgres://%s:%s@%s:%s/%s",
+		cfg.PostgresUser,
+		cfg.PostgresPassword,
+		cfg.PostgresHost,
+		cfg.PostgresPort,
+		cfg.PostgresDatabase,
+	)
+
+	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(postgresUrl)))
 
 	return bun.NewDB(sqldb, pgdialect.New())
 }

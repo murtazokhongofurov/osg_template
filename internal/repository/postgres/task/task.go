@@ -17,7 +17,10 @@ func NewRepository(DB *bun.DB) *Repository {
 	return &Repository{DB: DB}
 }
 
+
+
 func (r Repository) Create(ctx context.Context, data task.Create) (entity.Task, error) {
+
 	now := time.Now()
 	var detail entity.Task
 

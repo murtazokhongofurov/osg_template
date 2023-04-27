@@ -18,7 +18,7 @@ type Config struct {
 }
 
 func Load() Config {
-	err := godotenv.Load("./.env")
+	err := godotenv.Load(".env")
 	if err != nil {
 		log.Println("Error while connected .env")
 	}
