@@ -5,12 +5,22 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	d "github.com/osg_template/internal/controller/http/v1/developer"
 	e "github.com/osg_template/internal/controller/http/v1/employee"
+	p "github.com/osg_template/internal/controller/http/v1/project"
 	t "github.com/osg_template/internal/controller/http/v1/task"
 	"github.com/osg_template/internal/pkg/config"
 )
 
-func Router(task *t.Controller, emp *e.EmployeeController) {
+type Options struct {
+	Cfg  config.Config
+	Emp  e.EmployeeController
+	Task t.Controller
+	Dev  d.DevController
+	Pro  p.ProjectController
+}
+
+func Router(option *Options) {
 	r := gin.Default()
 
 	cfg := config.Load()
@@ -20,15 +30,15 @@ func Router(task *t.Controller, emp *e.EmployeeController) {
 		})
 	})
 	// employee
-	r.POST("/employee", emp.CreateEmployee)
-	r.GET("/employee/info/:id", emp.GetEmployeeById)
-	r.GET("/employees/:limit/:offset/:search", emp.GetAllEmployee)
-	r.PUT("/employee", emp.UpdateEmployee)
-	r.GET("/employee/:id", emp.DeleteEmployee)
+	r.POST("/employee", option.Emp.CreateEmployee)
+	r.GET("/employee/info/:id", option.Emp.GetEmployeeById)
+	r.GET("/employees/:limit/:offset/:search", option.Emp.GetAllEmployee)
+	r.PUT("/employee", option.Emp.UpdateEmployee)
+	r.GET("/employee/:id", option.Emp.DeleteEmployee)
 
 	// task
-	r.POST("/task", task.CreateTask)
-	r.GET("/tasks", task.GetTaskList)
+	r.POST("/task", option.Task.CreateTask)
+	r.GET("/tasks", option.Task.GetTaskList)
 
 	log.Fatalln(r.Run(":" + cfg.HttpPort))
 }

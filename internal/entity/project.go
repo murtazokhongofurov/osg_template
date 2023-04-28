@@ -2,7 +2,7 @@ package entity
 
 import "github.com/uptrace/bun"
 
-type Prject struct {
+type Project struct {
 	bun.BaseModel `bun:"table:prjects"`
 	BasicEntity
 	EmployeeId   *int    `json:"employee_id" bun:"employee_id"`

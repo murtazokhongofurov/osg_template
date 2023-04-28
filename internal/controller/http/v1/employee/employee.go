@@ -2,6 +2,7 @@ package employee
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -30,6 +31,7 @@ func (h EmployeeController) CreateEmployee(c *gin.Context) {
 		return
 	}
 
+	fmt.Println("id: ", body.CreatedBy)
 	ctx := context.Background()
 	data, err := h.useCase.CreateEmployee(ctx, body)
 	if err != nil {

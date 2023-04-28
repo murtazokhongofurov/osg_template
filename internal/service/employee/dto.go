@@ -7,7 +7,7 @@ type Create struct {
 	BirthDate    *string `json:"birth_date" form:"birth_date"`
 	Position     *string `json:"position" form:"position"`
 	Role         *string `json:"role" form:"role"`
-	CreatedBy    int     `json:"-" form:"-"`
+	CreatedBy    int     `json:"created_by" form:"created_by"`
 	Token        string  `json:"-" form:"-"`
 }
 
