@@ -2,6 +2,7 @@ package developer
 
 import (
 	"context"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -35,6 +36,7 @@ func (h DevController) CreateDev(c *gin.Context) {
 			"message": "something went wrong",
 			"status":  false,
 		})
+		log.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusCreated, gin.H{
@@ -137,7 +139,7 @@ func (h DevController) GetDevList(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusCreated, gin.H{
-		"message": "created",
+		"message": "Ok",
 		"status":  true,
 		"data": map[string]interface{}{
 			"result": data,

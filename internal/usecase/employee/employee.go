@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/osg_template/internal/entity"
 	"github.com/osg_template/internal/service/employee"
@@ -26,6 +27,7 @@ func (e UseCase) GetDetail(ctx context.Context, id int) (employee.Detail, error)
 		return employee.Detail{}, err
 	}
 	var detail employee.Detail
+	detail.Id = data.Id
 	detail.FullName = data.FullName
 	detail.ProfilePhoto = data.ProfilePhoto
 	detail.BirthDate = data.BirthDate
@@ -46,7 +48,7 @@ func (e UseCase) GetEmployeeList(ctx context.Context, filter employee.Filter) ([
 
 	for _, em := range data {
 		var detail employee.List
-		detail.Id = &em.Id
+		detail.Id = em.Id
 		detail.FullName = em.FullName
 		detail.ProfilePhoto = em.ProfilePhoto
 		detail.Position = em.Position
@@ -62,5 +64,18 @@ func (e UseCase) DeleteEmployee(ctx context.Context, id int, userId int) error {
 }
 
 func (e UseCase) UpdateEmployee(ctx context.Context, data employee.Update) (entity.Employee, error) {
-	return e.employee.Update(ctx, data)
+	info, err := e.employee.Update(ctx, data)
+	if err != nil {
+		return entity.Employee{}, err
+	}
+	var detail entity.Employee
+	detail.Id = info.Id
+	detail.FullName = info.FullName
+	detail.ProfilePhoto = info.ProfilePhoto
+	detail.Phone = info.Phone
+	detail.Position = info.Position
+	detail.Role = info.Role
+	detail.BirthDate = info.BirthDate
+	fmt.Println("detail =====>>>> ", detail)
+	return detail, nil
 }

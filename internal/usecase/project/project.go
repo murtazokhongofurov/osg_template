@@ -25,7 +25,7 @@ func (pu UseCase) GetProjectById(ctx context.Context, id int) (project.Detail, e
 		return project.Detail{}, err
 	}
 	var detail project.Detail
-	detail.Id = &data.Id
+	detail.Id = data.Id
 	detail.Name = data.Name
 	detail.FileUrl = data.FileUrl
 	detail.StartedDate = data.StartedDate
@@ -46,7 +46,7 @@ func (pu UseCase) GetProjectList(ctx context.Context, filter project.Filter) ([]
 	var list []project.List
 	for _, pro := range data {
 		var detail project.List
-		detail.Id = &pro.Id
+		detail.Id = pro.Id
 		detail.Name = pro.Name
 		detail.StartedDate = pro.StartedDate
 		detail.FinishedDate = pro.FinishedDate

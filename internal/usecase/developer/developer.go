@@ -25,7 +25,7 @@ func (du UseCase) GetDeveloperById(ctx context.Context, id int) (developer.Detai
 		return developer.Detail{}, err
 	}
 	var detail developer.Detail
-	detail.Id = &data.Id
+	detail.Id = data.Id
 	detail.EmployeeId = data.EmployeeId
 	detail.DeveloperRole = data.DeveloperRole
 	return detail, nil
@@ -39,7 +39,7 @@ func (du UseCase) GetDeveloperList(ctx context.Context, filter developer.Filter)
 	var list []developer.List
 	for _, dev := range data {
 		var detail developer.List
-		detail.Id = &dev.Id
+		detail.Id = dev.Id
 		detail.EmployeeId = dev.EmployeeId
 		detail.DeveloperRole = dev.DeveloperRole
 		list = append(list, detail)

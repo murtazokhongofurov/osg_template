@@ -141,6 +141,7 @@ func (h EmployeeController) UpdateEmployee(c *gin.Context) {
 			"message": "something went wrong",
 			"status":  false,
 		})
+		log.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{

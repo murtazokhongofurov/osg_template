@@ -12,7 +12,7 @@ type Create struct {
 }
 
 type Update struct {
-	Id           *int    `json:"id" form:"id"`
+	Id           int     `json:"id" form:"id"`
 	FullName     *string `json:"full_name" form:"full_name"`
 	ProfilePhoto *string `json:"profile_photo" form:"profile_photo"`
 	Phone        *string `json:"phone" form:"phone"`
@@ -22,7 +22,7 @@ type Update struct {
 }
 
 type List struct {
-	Id           *int    `json:"id" form:"id"`
+	Id           int     `json:"id" form:"id"`
 	FullName     *string `json:"full_name" form:"full_name"`
 	ProfilePhoto *string `json:"profile_photo" form:"profile_photo"`
 	Position     *string `json:"position" form:"position"`
@@ -30,7 +30,7 @@ type List struct {
 }
 
 type Detail struct {
-	Id           *int    `json:"id" form:"id"`
+	Id           int     `json:"id" form:"id"`
 	FullName     *string `json:"full_name" form:"full_name"`
 	ProfilePhoto *string `json:"profile_photo" form:"profile_photo"`
 	Phone        *string `json:"phone" form:"phone"`

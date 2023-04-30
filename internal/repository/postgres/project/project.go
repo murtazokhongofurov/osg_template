@@ -26,7 +26,7 @@ func (r Repository) Create(ctx context.Context, data project.Create) (entity.Pro
 	detail.FinishedDate = data.FinishedDate
 	detail.Status = data.Status
 	detail.FileUrl = data.FileUrl
-	detail.CreatedAt = &now
+	detail.CreatedAt = now
 
 	_, err := r.DB.NewInsert().Model(&detail).Exec(ctx)
 	return detail, err

@@ -91,3 +91,93 @@ func (tc Controller) GetTaskList(c *gin.Context) {
 	})
 
 }
+
+func (tc Controller) GetTaskId(c *gin.Context) {
+	id := c.Param("id")
+	taskId, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid id",
+			"status":  false,
+		})
+		return
+	}
+	ctx := context.Background()
+	data, err := tc.userCase.GetTaskDetail(ctx, taskId)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "something went wrong",
+			"status":  false,
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Ok",
+		"status":  true,
+		"data": map[string]interface{}{
+			"result": data,
+		},
+	})
+}
+
+func (tc Controller) UpdateTask(c *gin.Context) {
+	var body task_service.Update
+	err := c.ShouldBindJSON(&body)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid info",
+			"status":  false,
+		})
+		return
+	}
+	ctx := context.Background()
+	data, err := tc.userCase.UpdateTask(ctx, body)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Something went wrong",
+			"status":  false,
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Ok",
+		"status":  true,
+		"data": map[string]interface{}{
+			"result": data,
+		},
+	})
+}
+
+func (tc Controller) DeleteTask(c *gin.Context) {
+	id := c.Param("id")
+	taskId, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid task id",
+			"status":  false,
+		})
+		return
+	}
+	userId := c.Param("user_id")
+	adminId, err := strconv.Atoi(userId)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid user id",
+			"status":  false,
+		})
+		return
+	}
+	ctx := context.Background()
+	err = tc.userCase.DeleteTask(ctx, taskId, adminId)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Something went wrong",
+			"status":  false,
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"message": "deleted",
+		"status":  true,
+	})
+}

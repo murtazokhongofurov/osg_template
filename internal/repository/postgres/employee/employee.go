@@ -58,7 +58,7 @@ func (r Repository) GetAll(ctx context.Context, filter employee.Filter) ([]entit
 
 func (r Repository) Update(ctx context.Context, data employee.Update) (entity.Employee, error) {
 	var detail entity.Employee
-	detail.Id = *data.Id
+	detail.Id = data.Id
 
 	if data.FullName != nil {
 		detail.FullName = data.FullName
@@ -72,7 +72,13 @@ func (r Repository) Update(ctx context.Context, data employee.Update) (entity.Em
 	if data.Phone != nil {
 		detail.Phone = data.Phone
 	}
-	_, err := r.DB.NewUpdate().Model(&detail).Where("id = ?", data.Id).Exec(ctx)
+	if data.Position != nil {
+		detail.Position = data.Position
+	}
+	if data.Role != nil {
+		detail.Role = data.Role
+	}
+	err := r.DB.NewUpdate().Model(&detail).Where("id = ?", data.Id).Scan(ctx)
 	return detail, err
 }
 

@@ -7,13 +7,13 @@ type Filter struct {
 }
 
 type Create struct {
-	EmployeeId   *int    `json:"employee_id"`
+	EmployeeId   int     `json:"employee_id"`
 	Name         *string `json:"name"`
 	StartedDate  *string `json:"started_date"`
 	FinishedDate *string `json:"finished_date"`
 	FileUrl      *string `json:"file_url"`
 	Status       *string `json:"status"`
-	CreatedBy    *int    `json:"created_by" `
+	CreatedBy    int     `json:"created_by" `
 }
 
 type Update struct {
@@ -26,7 +26,7 @@ type Update struct {
 }
 
 type List struct {
-	Id           *int    `json:"id"`
+	Id           int     `json:"id"`
 	Name         *string `json:"name"`
 	StartedDate  *string `json:"started_date"`
 	FinishedDate *string `json:"finished_date"`
@@ -34,11 +34,11 @@ type List struct {
 }
 
 type Detail struct {
-	Id           *int    `json:"id"`
+	Id           int     `json:"id"`
 	Name         *string `json:"name"`
 	StartedDate  *string `json:"started_date"`
 	FinishedDate *string `json:"finished_date"`
 	FileUrl      *string `json:"file_url"`
 	Status       *string `json:"status"`
-	CreatedBy    *int    `json:"created_by"`
+	CreatedBy    int     `json:"created_by"`
 }

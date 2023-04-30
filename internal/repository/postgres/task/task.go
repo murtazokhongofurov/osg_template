@@ -17,8 +17,6 @@ func NewRepository(DB *bun.DB) *Repository {
 	return &Repository{DB: DB}
 }
 
-
-
 func (r Repository) Create(ctx context.Context, data task.Create) (entity.Task, error) {
 
 	now := time.Now()
@@ -28,7 +26,7 @@ func (r Repository) Create(ctx context.Context, data task.Create) (entity.Task, 
 	detail.Description = data.Description
 	detail.DeveloperId = data.DeveloperId
 	detail.FileUrl = data.FileUrl
-	detail.CreatedAt = &now
+	detail.CreatedAt = now
 	_, err := r.NewInsert().Model(&detail).Exec(ctx)
 	return detail, err
 }

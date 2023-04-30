@@ -22,7 +22,7 @@ func (r Repository) Create(ctx context.Context, data attendance.Create) (entity.
 	now := time.Now()
 	detail.EmployeeId = data.EmployeeId
 	detail.Type = data.Type
-	detail.CreatedAt = &now
+	detail.CreatedAt = now
 	_, err := r.DB.NewInsert().Model(&detail).Exec(ctx)
 	return detail, err
 }

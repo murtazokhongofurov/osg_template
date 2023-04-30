@@ -1,9 +1,9 @@
 package developer
 
 type Create struct {
-	EmployeeId    *int    `json:"employee_id"`
+	EmployeeId    int     `json:"employee_id"`
 	DeveloperRole *string `json:"developer_role"`
-	CreatedBy     *int    `json:"created_by"`
+	CreatedBy     int    `json:"created_by"`
 }
 
 type Update struct {
@@ -12,14 +12,14 @@ type Update struct {
 }
 
 type List struct {
-	Id            *int    `json:"id"`
-	EmployeeId    *int    `json:"employee_id"`
+	Id            int     `json:"id"`
+	EmployeeId    int     `json:"employee_id"`
 	DeveloperRole *string `json:"developer_role"`
 }
 
 type Detail struct {
-	Id            *int    `json:"id"`
-	EmployeeId    *int    `json:"employee_id"`
+	Id            int    `json:"id"`
+	EmployeeId    int    `json:"employee_id"`
 	DeveloperRole *string `json:"developer_role"`
 }
 

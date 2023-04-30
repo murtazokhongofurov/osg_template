@@ -7,5 +7,8 @@ CREATE TABLE IF NOT EXISTS projects(
     started_date DATE,
     finished_date DATE,
     created_by INT,
-    deleted_by INT
+    deleted_by INT,
+    created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+    deleted_at TIMESTAMP WITHOUT TIME ZONE
 );
