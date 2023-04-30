@@ -11,10 +11,10 @@ import (
 )
 
 type DevController struct {
-	dev developer.UseCase
+	dev *developer.UseCase
 }
 
-func NewDevController(dev developer.UseCase) *DevController {
+func NewDevController(dev *developer.UseCase) *DevController {
 	return &DevController{dev: dev}
 }
 
