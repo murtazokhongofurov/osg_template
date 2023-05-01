@@ -11,9 +11,9 @@ make migrate_up
 ```
 
 ## Used library
-`github.com/uptrace/bun` \\
-`github.com/joho/godotenv` \\
-`github.com/spf13/cast` \\ 
+`github.com/uptrace/bun` \n
+`github.com/joho/godotenv` 
+`github.com/spf13/cast` 
 `github.com/uptrace/bun/dialect/pgdialect` \\
 `github.com/uptrace/bun/driver/pgdriver`
 
