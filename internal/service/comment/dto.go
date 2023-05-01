@@ -1,9 +1,10 @@
 package comment
 
 type Create struct {
-	DeveloperId *int    `json:"developer_id"`
+	DeveloperId int     `json:"developer_id"`
+	TaskId      int     `json:"task_id"`
 	Text        *string `json:"text"`
-	CreatedBy   *int    `json:"created_by"`
+	CreatedBy   int     `json:"created_by"`
 }
 
 type Update struct {
@@ -12,8 +13,9 @@ type Update struct {
 }
 
 type List struct {
-	Id          *int    `json:"id"`
-	DeveloperId *int    `json:"developer_id"`
+	Id          int     `json:"id"`
+	DeveloperId int     `json:"developer_id"`
+	TaskId      int     `json:"task_id"`
 	Text        *string `json:"text"`
 }
 

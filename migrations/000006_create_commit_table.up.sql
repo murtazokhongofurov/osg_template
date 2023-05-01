@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS comment(
     text TEXT,
     created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
-    deleted_at TIMESTAMP WITHOUT TIME ZONE,
+    deleted_at TIMESTAMP NULL,
     created_by INT,
     deleted_by INT
 );

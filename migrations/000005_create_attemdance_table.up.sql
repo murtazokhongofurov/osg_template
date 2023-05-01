@@ -3,5 +3,5 @@ CREATE TABLE IF NOT EXISTS attendance(
     employee_id INT NOT NULL REFERENCES employees(id),
     type VARCHAR(100),
     created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
-    deleted_at  TIMESTAMP WITHOUT TIME ZONE
+    deleted_at  TIMESTAMP NULL
 );

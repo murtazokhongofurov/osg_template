@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	c "github.com/osg_template/internal/controller/http/v1/comment"
 	d "github.com/osg_template/internal/controller/http/v1/developer"
 	e "github.com/osg_template/internal/controller/http/v1/employee"
 	p "github.com/osg_template/internal/controller/http/v1/project"
@@ -18,6 +19,7 @@ type Options struct {
 	Task t.Controller
 	Dev  d.DevController
 	Pro  p.ProjectController
+	Com  c.ComController
 }
 
 func Router(option *Options) {
@@ -56,6 +58,13 @@ func Router(option *Options) {
 	r.GET("task/:id", option.Task.GetTaskId)
 	r.PUT("task", option.Task.UpdateTask)
 	r.DELETE("task/:id/:user_id", option.Task.DeleteTask)
+
+	// comment
+	r.POST("/comment", option.Com.CreateComment)
+	r.GET("/task/comments/:id", option.Com.GetCommentTaskId)
+	r.GET("/comments", option.Com.GetCommentList)
+	r.PUT("/comment", option.Com.UpdateComment)
+	r.DELETE("/comment/:id/:user_id", option.Com.DeleteComment)
 
 	log.Fatalln(r.Run(":" + cfg.HttpPort))
 }

@@ -21,16 +21,18 @@ func NewCommentRepo(DB *bun.DB) *Repository {
 func (r Repository) Create(ctx context.Context, data comment.Create) (entity.Comment, error) {
 	var detail entity.Comment
 	now := time.Now()
+	detail.TaskId = data.TaskId
 	detail.DeveloperId = data.DeveloperId
 	detail.Text = data.Text
 	detail.CreatedAt = now
+	detail.CreatedBy = data.CreatedBy
 	_, err := r.DB.NewInsert().Model(&detail).Exec(ctx)
 	return detail, err
 }
 
 func (r Repository) GetAll(ctx context.Context, filter comment.Filter) ([]entity.Comment, int, error) {
 	var list []entity.Comment
-	q := r.DB.NewSelect().Model(&list)
+	q := r.DB.NewSelect().Model(&list).Where("deleted_at IS NULL")
 	if filter.Limit != nil {
 		q.Limit(*filter.Limit)
 	}
@@ -43,7 +45,7 @@ func (r Repository) GetAll(ctx context.Context, filter comment.Filter) ([]entity
 
 func (r Repository) GetTaskId(ctx context.Context, id int) ([]entity.Comment, int, error) {
 	var list []entity.Comment
-	q := r.DB.NewSelect().Model(&list).Where("task_id = ?", id)
+	q := r.DB.NewSelect().Model(&list).Where("task_id = ?", id).Where("deleted_at IS NULL")
 	count, err := q.ScanAndCount(ctx)
 	return list, count, err
 }
@@ -54,7 +56,7 @@ func (r Repository) Update(ctx context.Context, data comment.Update) (entity.Com
 	if data.Text != nil {
 		detail.Text = data.Text
 	}
-	_, err := r.DB.NewUpdate().Model(&detail).Where("id = ?", data.Id).Exec(ctx)
+	_, err := r.DB.NewUpdate().Model(&detail).Where("id = ?", data.Id).Where("deleted_at IS NULL").Exec(ctx)
 	return detail, err
 }
 
