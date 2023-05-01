@@ -3,7 +3,7 @@
 ## About project
 This project is designed to explore new architecture. It has an API part and all the routers are listed in the api part. This project is run in cmd file.
 
-## Run prject
+## Run project
 ```
 make run
 go run cmd/main.go
