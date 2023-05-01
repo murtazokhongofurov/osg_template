@@ -16,7 +16,7 @@ go run cmd/main.go
 `github.com/uptrace/bun/dialect/pgdialect`\
 `github.com/uptrace/bun/driver/pgdriver`
 
-## Create table with migration
+## Tables can create commend
 ```
 make migrate_up
 ```
